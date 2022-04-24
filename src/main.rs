@@ -1,26 +1,10 @@
-use serde::{Serialize, Deserialize};
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Kline(
-  i64,
-  String,
-  String,
-  String,
-  String,
-  String,
-  i64,
-  String,
-  i64,
-  String,
-  String,
-  String,
-);
+use crypto_data::candle;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let resp = reqwest::get("https://api.binance.com/api/v3/klines?symbol=BTCUSDT&interval=1m&limit=10")
         .await?
-        .json::<Vec<Kline>>()
+        .json::<Vec<candle::Candle>>()
         .await?;
     println!("{:#?}", resp);
     Ok(())
