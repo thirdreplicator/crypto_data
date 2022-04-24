@@ -24,3 +24,11 @@ pub async fn request() -> Result<Vec<Candle>, Error> {
         .await?;
     Ok(resp)
 }
+
+pub fn print_candles(candles: Vec<Candle>) {
+    for a in candles{
+        println!("{:#?}", a);
+    }
+    ()
+}
+
